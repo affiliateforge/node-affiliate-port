@@ -1,0 +1,3 @@
+yarn run affected:lint
+yarn run affected:test
+yarn run affected:build

@@ -1,0 +1,65 @@
+{
+  "name": "admitad-cpa",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/admitad-cpa/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "analyzeSourceFiles": true,
+        "outputPath": "dist/packages/admitad-cpa",
+        "main": "packages/admitad-cpa/src/index.ts",
+        "tsConfig": "packages/admitad-cpa/tsconfig.lib.json",
+        "assets": ["packages/admitad-cpa/*.md"],
+        "generatePackageJson": true,
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{options.coverageDirectory}"
+      ],
+      "options": {
+        "jestConfig": "packages/admitad-cpa/jest.config.ts",
+        "passWithNoTests": true,
+        "codeCoverage": true,
+        "coverageDirectory": "coverage/packages/admitad-cpa",
+        "coverageReporters": [
+          "html",
+          "text",
+          "text-summary",
+          "cobertura"
+        ],
+        "clearMocks": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs admitad-cpa {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/admitad-cpa/**/*.ts",
+          "packages/admitad-cpa/package.json"
+        ],
+        "fix": true
+      }
+    }
+  },
+  "tags": []
+}
