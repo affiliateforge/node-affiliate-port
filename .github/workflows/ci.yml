@@ -26,8 +26,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
-      - run: npm ci
+          cache: 'yarn'
+      - run: yarn install
       - uses: nrwl/nx-set-shas@v4
 
       - run: npx nx-cloud record -- nx format:check
