@@ -35,6 +35,8 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: "master"
 
       - run: npx nx-cloud record -- nx format:check
       - run: npx nx affected -t lint test build
